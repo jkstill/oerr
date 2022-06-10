@@ -41,6 +41,7 @@ my $DEBUG=0;
 =cut
 
 my $msgType = defined($ARGV[1]) ? $ARGV[1] : 'ora';
+my $msgLang = defined($ARGV[2]) ? $ARGV[2] : 'us';
 
 # default error file is for oracle rdbms
 # can also do some others
@@ -97,6 +98,7 @@ if ($errNum eq '-h') {
 	print "oerr.pl -h\n";
 	print "oerr.pl ERRNUM\n";
 	print "oerr.pl ERRNUM MSGTYPE\n";
+	print "oerr.pl ERRNUM MSGTYPE LANG\n";
 	print "\nMessage Types:\n";
 	foreach my $key ( sort keys %msgFacility ) {
 		printf "%8s: %s\n", $key, $msgFacility{$key}->[$msgLocation{description}];
@@ -123,8 +125,7 @@ my @filePath=split(/\//, $0);
 pop @filePath;
 my $filePath=join('/',@filePath);
 
-# change the file name for your own language
-my $file="$filePath/${msgType}us.msg";
+my $file="$filePath/${msgType}${msgLang}.msg";
 print "FILE: $file\n" if $DEBUG;
 
 if ($DEBUG) {

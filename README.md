@@ -111,4 +111,37 @@ Message Types:
         default is 'ora'
 ```
 
+## oerr.pl - Generating msg files from msb files
+
+Should you want to generate the a msg file from an msb file, this script will do that.
+
+Why would you want to do that?  
+
+Perhaps you have installed Oracle as US English, and would like a copy of the message file in French.
+
+`oerr.pl` can generate the file 'oraf.msg'
+
+```text
+  ./oerr-gen.pl  $ORACLE_HOME/rdbms/mesg/oraf.msb  > oraf.msg
+```
+
+Then the French error text can be retrieved with oerr.pl by including a language flag.
+
+```text
+ $  ./oerr.pl 1555 ora f
+ 01555, 00000, "clich�s trop vieux : rollback segment no %s, nomm� "%s", trop petit"
+```
+
+Multibyte characters do not yet work properly.
+
+Also, the comments normally seen when using oerr do not appear, as the comments are not stored in the msb file.
+
+```text
+  $ ./oerr.pl 1555
+  01555, 00000, "snapshot too old: rollback segment number %s with name \"%s\" too small"
+  // *Cause: rollback records needed by a reader for consistent read are
+  //	   overwritten by other writers
+  // *Action: If in Automatic Undo Management mode, increase undo_retention
+  //          setting. Otherwise, use larger rollback segments
+```
 
