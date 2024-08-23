@@ -125,6 +125,10 @@ my @filePath=split(/\//, $0);
 pop @filePath;
 my $filePath=join('/',@filePath);
 
+unless ($filePath  ) {
+	$filePath = './';
+}
+
 my $file="$filePath/${msgType}${msgLang}.msg";
 print "FILE: $file\n" if $DEBUG;
 
