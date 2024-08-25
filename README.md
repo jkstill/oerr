@@ -111,7 +111,7 @@ Message Types:
         default is 'ora'
 ```
 
-## oerr.pl - Generating msg files from msb files
+## oerr-gen.pl - Generating msg files from msb files
 
 Should you want to generate the a msg file from an msb file, this script will do that.
 
@@ -144,4 +144,48 @@ Also, the comments normally seen when using oerr do not appear, as the comments 
   // *Action: If in Automatic Undo Management mode, increase undo_retention
   //          setting. Otherwise, use larger rollback segments
 ```
+
+## oerrs.pl - Standalone lookup utility
+
+The messages are embedded into the oerrs.pl script so that only 1 file needs to be copied.
+
+See `oerrs.pl -h` and `perldoc oerrs.pl` on how to generate the error hash file for insertion into the script.
+
+```text
+
+    $  ./oerrs.pl 6502
+    06502  "PL/SQL: numeric or value error%s"
+    // *Cause: An arithmetic, numeric, string, conversion, or constraint error
+    //         occurred. For example, this error occurs if an attempt is made to
+    //         assign the value NULL to a variable declared NOT NULL, or if an
+    //         attempt is made to assign an integer larger than 99 to a variable
+    //         declared NUMBER(2).
+    // *Action: Change the data, how it is manipulated, or how it is declared so
+    //          that values do not violate constraints.
+```
+
+The are currently 2 sets of error messages loaded:
+
+  - ora
+  - ogg
+
+```text
+    ./oerrs.pl 171 ogg
+    00717  "Found unsupported in-memory undo record in sequence {0}, at RBA {1}, with SCN {2} ... Minimum supplemental logging must be enabled to prevent data loss."
+    // *{0}: seqNo (Number)
+    // *{1}: RBA (Number)
+    // *{2}: SCN (String)
+    // *Cause:  Minimal supplemental logging is not enabled, so Oracle may use
+    //          in-memory undo. This causes multiple undo/redo pairs to be written
+    //          within the same redo record. Extract does not support these types
+    //          of records.
+    // *Action: Enable minimal supplemental logging. For instructions on how to set
+    //          logging for Oracle GoldenGate, see the Oracle GoldenGate
+    //          installation and setup documentation for the Oracle database.
+```
+
+
+
+
+
 
