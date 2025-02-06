@@ -5,7 +5,7 @@ use warnings;
 use IO::File;
 use Data::Dumper;
 
-my $DEBUG=0;
+my $DEBUG=1;
 
 =head1 Oracle Error Lookup
 
@@ -124,6 +124,10 @@ my $paddedErrNum=substr($padString . $errNum,-${padLength});
 my @filePath=split(/\//, $0);
 pop @filePath;
 my $filePath=join('/',@filePath);
+
+unless ($filePath  ) {
+	$filePath = './';
+}
 
 my $file="$filePath/${msgType}${msgLang}.msg";
 print "FILE: $file\n" if $DEBUG;
