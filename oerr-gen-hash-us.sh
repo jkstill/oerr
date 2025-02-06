@@ -20,4 +20,6 @@ cat <<-EOF >> oraus.hash
 } 
 EOF
 
+rm -f $tmpfile
+
 
