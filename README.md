@@ -151,6 +151,15 @@ Also, the comments normally seen when using oerr do not appear, as the comments 
 
 The messages are embedded into the oerrs.pl script so that only 1 file needs to be copied.
 
+Create the oraus.hash file with the `oerr-gen-hash-us.sh` script.
+
+```text
+$  ./oerr-gen-hash-us.sh
+```
+
+The oraus.hash file can then be embdedded into the oerrs.pl script.
+
+
 See `oerrs.pl -h` and `perldoc oerrs.pl` on how to generate the error hash file for insertion into the script.
 
 ```text
@@ -225,7 +234,7 @@ The JSON is then directly embedded into the Go source.
 #### Create the Hash file
 
 ```text
-$  ./oerr-gen-hash.pl rman > rman.has
+$  ./oerr-gen-hash.pl rman > rman.hash
 $  ls -l rman.hash
 -rw-r--r-- 1 jkstill dba 671201 Sep  2 12:39 rman.hash
 ```

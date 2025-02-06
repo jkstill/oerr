@@ -5,7 +5,7 @@ use warnings;
 use IO::File;
 use Data::Dumper;
 
-my $DEBUG=1;
+my $DEBUG=0;
 
 =head1 Oracle Error Lookup
 
